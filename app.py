@@ -5,6 +5,7 @@ import tempfile
 import os
 import re
 import time
+import gc
 import numpy as np
 from zipvoice.luxvoice import LuxTTS
 
@@ -134,6 +135,16 @@ def generate_speech_with_prompt(
             # Clean up temporary prompt file if created
             if temp_audio_path and temp_audio_path != audio_file and os.path.exists(temp_audio_path):
                 os.unlink(temp_audio_path)
+            
+            # Clear GPU cache after every generation
+            try:
+                if torch.backends.mps.is_available():
+                    torch.mps.empty_cache()
+                if torch.cuda.is_available():
+                    torch.cuda.empty_cache()
+                gc.collect()
+            except Exception as e:
+                print(f"Error clearing cache: {e}")
                 
     except Exception as e:
         return None, f"### Error generating speech:\n{str(e)}"
