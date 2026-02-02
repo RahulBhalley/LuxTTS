@@ -215,7 +215,7 @@ with gr.Blocks(title="LuxTTS Voice Cloning", theme=gr.themes.Soft()) as demo:
                         info="Higher = Better quality, Slower"
                     )
                     speed_sld = gr.Slider(
-                        minimum=0.5, maximum=2.0, value=0.9, step=0.1,
+                        minimum=0.5, maximum=2.0, value=0.7, step=0.1,
                         label="Speech Speed",
                         info="Lower = Slower & Clearer"
                     )
@@ -227,7 +227,7 @@ with gr.Blocks(title="LuxTTS Voice Cloning", theme=gr.themes.Soft()) as demo:
                         info="Controls normalization volume"
                     )
                     ref_dur_sld = gr.Slider(
-                        minimum=1, maximum=10000, value=5, step=1,
+                        minimum=1, maximum=10000, value=10, step=1,
                         label="Ref Duration (sec)",
                         info="Slice length of prompt"
                     )
